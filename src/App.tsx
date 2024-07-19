@@ -77,7 +77,7 @@ const App: React.FC = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false)
   const [snackbarMessage, setSnackbarMessage] = useState('')
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const { loading, error, fetchData, postData } = useApi()
+  const { loading, error, fetchData } = useApi()
 
   useEffect(() => {
     fetchAllRecords()
