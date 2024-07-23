@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { DataRecord } from '../types'
 import { fetchAllRecords, fetchImage } from '../utils/helpers'
 import useApi from './useApi'
-import useSnackbar from './useSnackBar'
+import useSnackbar from './useSnackbar'
 
 const useRecords = () => {
   const { fetchData } = useApi()
