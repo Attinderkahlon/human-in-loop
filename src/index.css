@@ -5,9 +5,9 @@
 
 /* Custom dark mode styles */
 body {
-  @apply bg-white text-black;
+  @apply text-black bg-white;
 }
 
 .dark {
-  @apply bg-gray-900 text-white h-dvh;
+  @apply h-full text-white bg-gray-900;
 }

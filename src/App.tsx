@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import {
-  Grid,
-  Typography,
-  Snackbar,
-  Box,
-  Container,
-  Switch,
-} from '@mui/material'
+import { Typography, Snackbar, Switch } from '@mui/material'
 import useApi from './hooks/useApi'
 import { DataRecord } from './types'
 import { fetchAllRecords, fetchImage, handleApprove } from './utils/helpers'
@@ -24,7 +17,7 @@ const App: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false)
   const [snackbarOpen, setSnackbarOpen] = useState(false)
   const [snackbarMessage, setSnackbarMessage] = useState('')
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(true)
 
   const loadRecords = useCallback(async () => {
     try {
@@ -97,44 +90,44 @@ const App: React.FC = () => {
   const currentRecord = records[currentIndex]
 
   return (
-    <div className={darkMode ? 'dark' : ''}>
-      <Container>
-        <Grid container spacing={4} alignItems='center'>
-          <Grid item xs={12}>
-            <Box display='flex' justifyContent='space-between' marginBottom={4}>
-              <Typography variant='h4' gutterBottom>
-                Record Verification
-              </Typography>
-              <div>
-                Dark Mode
-                <Switch
-                  checked={darkMode}
-                  onChange={() => {
-                    setDarkMode(!darkMode)
-                  }}
-                />
-              </div>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <RecordForm
-              record={currentRecord}
-              onSubmit={onApprove}
-              isEditing={isEditing}
-              onEdit={handleEdit}
-            />
-          </Grid>
-          <Grid item xs={12} md={8}>
-            <ImageViewer imageUrl={imageUrl} />
-          </Grid>
-        </Grid>
-        <Snackbar
-          open={snackbarOpen}
-          autoHideDuration={6000}
-          onClose={() => setSnackbarOpen(false)}
-          message={snackbarMessage}
-        />
-      </Container>
+    <div className={`${darkMode ? 'dark' : ''} min-h-screen`}>
+      <div className='container px-4 py-8 mx-auto'>
+        <div className='flex flex-col space-y-8'>
+          <div className='flex items-center justify-between'>
+            <Typography variant='h4' className='text-2xl font-bold'>
+              Record Verification
+            </Typography>
+            <div className='flex items-center space-x-2'>
+              <span>Dark Mode</span>
+              <Switch
+                checked={darkMode}
+                onChange={() => setDarkMode(!darkMode)}
+              />
+            </div>
+          </div>
+
+          <div className='flex flex-col space-y-8 lg:flex-row lg:space-y-0 lg:space-x-8'>
+            <div className='w-full lg:w-[30%]'>
+              <RecordForm
+                record={currentRecord}
+                onSubmit={onApprove}
+                isEditing={isEditing}
+                onEdit={handleEdit}
+              />
+            </div>
+            <div className='w-full lg:w-[70%]'>
+              <ImageViewer imageUrl={imageUrl} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackbarOpen(false)}
+        message={snackbarMessage}
+      />
     </div>
   )
 }
