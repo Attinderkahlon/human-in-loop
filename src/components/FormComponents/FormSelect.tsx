@@ -1,5 +1,3 @@
-// FormComponents/FormSelect.tsx
-import React from 'react'
 import {
   FormControl,
   InputLabel,
@@ -9,29 +7,38 @@ import {
 } from '@mui/material'
 import { useField } from 'formik'
 
+interface FormSelectProps {
+  name: string
+  label: string
+  options: { value: string; label: string }[]
+  disabled: boolean
+  [key: string]: unknown
+}
+
 const FormSelect = ({
   name,
   label,
   options,
+  disabled,
   ...props
-}: {
-  name: string
-  label: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  options: any[]
-  [key: string]: unknown
-}) => {
+}: FormSelectProps) => {
   const [field, meta] = useField(name)
 
   return (
-    <FormControl fullWidth error={meta.touched && Boolean(meta.error)}>
+    <FormControl
+      fullWidth
+      error={meta.touched && Boolean(meta.error)}
+      variant='outlined'
+    >
       <InputLabel id={`${name}-label`}>{label}</InputLabel>
+
       <Select
         {...field}
         {...props}
         labelId={`${name}-label`}
         id={name}
         label={label}
+        disabled={disabled}
       >
         {options.map((option) => (
           <MenuItem key={option.value} value={option.value}>

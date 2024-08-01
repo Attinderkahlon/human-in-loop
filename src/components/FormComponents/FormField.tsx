@@ -1,13 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// FormComponents/FormField.tsx
-import React from 'react'
 import { TextField } from '@mui/material'
 import { useField } from 'formik'
 
-const FormField = (
-  { name, label }: { name: string; label: string; [key: string]: any },
-  ...props: any
-) => {
+interface FormFieldProps {
+  name: string
+  label: string
+  disabled?: boolean
+  [key: string]: any
+}
+
+const FormField = ({ name, label, disabled, ...props }: FormFieldProps) => {
   const [field, meta] = useField(name)
 
   return (
@@ -18,6 +20,7 @@ const FormField = (
       fullWidth
       error={meta.touched && Boolean(meta.error)}
       helperText={meta.touched && meta.error}
+      disabled={disabled}
     />
   )
 }

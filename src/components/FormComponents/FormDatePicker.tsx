@@ -1,14 +1,21 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// FormComponents/FormDatePicker.tsx
-import React from 'react'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import { useField, useFormikContext } from 'formik'
 import dayjs from 'dayjs'
 
-const FormDatePicker = (
-  { name, label }: { name: string; label: string; [key: string]: any },
-  ...props: any
-) => {
+interface FormDatePickerProps {
+  name: string
+  label: string
+  disabled: boolean
+  [key: string]: any
+}
+
+const FormDatePicker = ({
+  name,
+  label,
+  disabled,
+  ...props
+}: FormDatePickerProps) => {
   const [field, meta] = useField(name)
   const { setFieldValue } = useFormikContext()
 
@@ -28,6 +35,7 @@ const FormDatePicker = (
           helperText: meta.touched && meta.error,
         },
       }}
+      disabled={disabled}
     />
   )
 }

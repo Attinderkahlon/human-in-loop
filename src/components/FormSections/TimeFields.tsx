@@ -1,7 +1,4 @@
-// FormSections/TimeFields.tsx
-import React from 'react'
 import { Grid } from '@mui/material'
-import FormField from '../FormComponents/FormField'
 import FormTimePicker from '../FormComponents/FormTimePicker'
 
 const TimeFields = ({ isEditing }: { isEditing: boolean }) => (
@@ -21,7 +18,7 @@ const TimeFields = ({ isEditing }: { isEditing: boolean }) => (
       />
     </Grid>
     <Grid item xs={12} md={6}>
-      <FormField
+      <FormTimePicker
         name='total_work'
         label='Total Work'
         type='time'
@@ -29,7 +26,7 @@ const TimeFields = ({ isEditing }: { isEditing: boolean }) => (
       />
     </Grid>
     <Grid item xs={12} md={6}>
-      <FormField
+      <FormTimePicker
         name='total_rest'
         label='Total Rest'
         type='time'

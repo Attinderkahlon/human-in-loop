@@ -1,13 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from 'react'
+
 import { TimePicker } from '@mui/x-date-pickers/TimePicker'
 import { useField, useFormikContext } from 'formik'
 import dayjs from 'dayjs'
 
-const FormTimePicker = (
-  { name, label }: { name: string; label: string; [key: string]: any },
-  ...props: any
-) => {
+interface FormTimePickerProps {
+  name: string
+  label: string
+  disabled: boolean
+  [key: string]: any
+}
+
+const FormTimePicker = ({
+  name,
+  label,
+  disabled,
+  ...props
+}: FormTimePickerProps) => {
   const [field, meta] = useField(name)
   const { setFieldValue } = useFormikContext()
 
@@ -19,6 +28,7 @@ const FormTimePicker = (
       onChange={(newValue) => {
         setFieldValue(name, newValue ? newValue.format('HH:mm') : 'NA')
       }}
+      disabled={disabled}
       slotProps={{
         textField: {
           fullWidth: true,
