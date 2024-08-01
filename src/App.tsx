@@ -22,9 +22,13 @@ const App: React.FC = () => {
   const loadRecords = useCallback(async () => {
     try {
       const unverifiedRecords = await fetchAllRecords(fetchData)
-      setRecords(unverifiedRecords)
-      if (unverifiedRecords.length > 0) {
-        const imageUrl = await fetchImage(unverifiedRecords[0].file_path)
+      const modifiedRecords = unverifiedRecords.map((record) => ({
+        ...record,
+        driver_signature: record.driver_signature === null ? 'no' : 'yes',
+      }))
+      setRecords(modifiedRecords)
+      if (modifiedRecords.length > 0) {
+        const imageUrl = await fetchImage(modifiedRecords[0].file_path)
         setImageUrl(imageUrl)
       }
     } catch (error) {
@@ -110,6 +114,7 @@ const App: React.FC = () => {
             <div className='w-full lg:w-[30%]'>
               <RecordForm
                 record={currentRecord}
+                formType={currentRecord.form_type}
                 onSubmit={onApprove}
                 isEditing={isEditing}
                 onEdit={handleEdit}
