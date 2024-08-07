@@ -48,7 +48,6 @@ const FormLayout = ({
     >
       {({ isSubmitting, setFieldValue, values }) => (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <pre>{values.driver_signature}</pre>
           <Form>
             <h1 className='mb-8 text-xl'>
               Form Type:{' '}
