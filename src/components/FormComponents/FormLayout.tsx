@@ -46,8 +46,9 @@ const FormLayout = ({
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, setFieldValue, values }) => (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <pre>{values.driver_signature}</pre>
           <Form>
             <h1 className='mb-8 text-xl'>
               Form Type:{' '}
@@ -70,10 +71,9 @@ const FormLayout = ({
                         label={field.replace(/_/g, ' ').toUpperCase()}
                         options={selectOptions.driver_signature}
                         disabled={!isEditing}
-                        value={
-                          initialValues.driver_signature
-                            ? initialValues.driver_signature
-                            : 'no'
+                        value={values.driver_signature}
+                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                          setFieldValue(field, e.target.value)
                         }
                       />
                     ) : (
