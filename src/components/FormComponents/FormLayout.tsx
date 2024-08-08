@@ -88,6 +88,20 @@ const FormLayout = ({
                 )
               })}
               <Grid item xs={12}>
+                {Object.keys(errors).length > 0 && (
+                  <Grid item xs={12}>
+                    <Box mt={2}>
+                      <Typography variant='h6' color='error'>
+                        Validation Errors:
+                      </Typography>
+                      {Object.entries(errors).map(([field, error]) => (
+                        <Typography key={field} variant='body2' color='error'>
+                          {field}: {error}
+                        </Typography>
+                      ))}{' '}
+                    </Box>
+                  </Grid>
+                )}
                 <Box display='flex' justifyContent='space-between'>
                   <Button
                     type='submit'
@@ -108,16 +122,6 @@ const FormLayout = ({
                   )}
                 </Box>
               </Grid>
-              {Object.keys(errors).length > 0 && (
-                <Grid item xs={12}>
-                  <Box mt={2}>
-                    <Typography variant='h6' color='error'>
-                      Validation Errors:
-                    </Typography>
-                    <pre>{JSON.stringify(errors, null, 2)}</pre>
-                  </Box>
-                </Grid>
-              )}
             </Grid>
           </Form>
         </LocalizationProvider>
