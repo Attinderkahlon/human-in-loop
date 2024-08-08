@@ -88,4 +88,23 @@ export const formConfigurations = {
       'driver_signature',
     ],
   },
+  default: {
+    fields: [
+      'date',
+      'diesel_qty',
+      'total_fuel_amount',
+      'fuel_card',
+      'truck_rego_number',
+      'driver_name',
+      'trailer_A',
+      'trailer_B',
+      'trailer_AB',
+      'trip',
+      'driver_license',
+      'driver_licence_expiry',
+      'pick_up_location',
+      'drop_off_location',
+      'driver_signature',
+    ],
+  },
 }

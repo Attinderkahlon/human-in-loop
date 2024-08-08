@@ -40,9 +40,9 @@ const FormLayout = ({
 }: FormLayoutProps) => {
   const config = formConfigurations[formType as keyof typeof formConfigurations]
 
-  if (!config) {
-    return <div>Error: Invalid form type</div>
-  }
+  // if (!config) {
+  //   return <div>Error: Invalid form type</div>
+  // }
 
   return (
     <Formik
@@ -120,16 +120,19 @@ const FormLayout = ({
 }
 
 const getFieldType = (field: string): string => {
-  if (field.includes('date')) return 'date'
-  if (
-    field.includes('time') ||
-    field.includes('break') ||
-    field.includes('total_work') ||
-    field.includes('total_rest')
-  )
-    return 'time'
-  if (field.includes('signature')) return 'select'
-  return 'text'
+  switch (true) {
+    case field.includes('date'):
+      return 'date'
+    case field.includes('time') ||
+      field.includes('break') ||
+      field.includes('total_work') ||
+      field.includes('total_rest'):
+      return 'time'
+    case field.includes('signature'):
+      return 'select'
+    default:
+      return 'text'
+  }
 }
 
 export default FormLayout
