@@ -59,7 +59,7 @@ export const formConfigurations = {
       'truck_rego_number',
     ],
   },
-  cl_pre_trip: {
+  CL_pre_trip: {
     fields: [
       'date',
       'driver_name',

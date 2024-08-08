@@ -28,8 +28,15 @@ const App: React.FC = () => {
       }))
       setRecords(modifiedRecords)
       if (modifiedRecords.length > 0) {
-        const imageUrl = await fetchImage(modifiedRecords[0].file_path)
-        setImageUrl(imageUrl)
+        const { imageUrl, error } = await fetchImage(
+          modifiedRecords[0].file_path
+        )
+        if (error) {
+          setSnackbarMessage(error)
+          setSnackbarOpen(true)
+        } else {
+          setImageUrl(imageUrl ?? ('' as string)) // Cast imageUrl to string
+        }
       }
     } catch (error) {
       setSnackbarMessage((error as Error).message)
@@ -49,8 +56,8 @@ const App: React.FC = () => {
     if (unverifiedRecords.length > 0) {
       setCurrentIndex(0)
       try {
-        const imageUrl = await fetchImage(unverifiedRecords[0].file_path)
-        setImageUrl(imageUrl)
+        const { imageUrl } = await fetchImage(unverifiedRecords[0].file_path)
+        setImageUrl(imageUrl ?? ('' as string)) // Cast imageUrl to string
       } catch (error) {
         setSnackbarMessage((error as Error).message)
         setSnackbarOpen(true)

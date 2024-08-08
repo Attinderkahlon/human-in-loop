@@ -40,6 +40,10 @@ const FormLayout = ({
 }: FormLayoutProps) => {
   const config = formConfigurations[formType as keyof typeof formConfigurations]
 
+  if (!config) {
+    return <div>Error: Invalid form type</div>
+  }
+
   return (
     <Formik
       initialValues={initialValues}

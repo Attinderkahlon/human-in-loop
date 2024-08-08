@@ -15,16 +15,19 @@ export const fetchAllRecords = async (
   }
 }
 
-export const fetchImage = async (imagePath: string): Promise<string> => {
+export const fetchImage = async (
+  imagePath: string
+): Promise<{ imageUrl: string | null; error: string | null }> => {
   try {
     const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/image`, {
       params: { path: imagePath },
       responseType: 'blob',
     })
-    return URL.createObjectURL(new Blob([response.data]))
+    const imageUrl = URL.createObjectURL(new Blob([response.data]))
+    return { imageUrl, error: null }
   } catch (error) {
     console.error('Error fetching image:', error)
-    throw new Error('Error fetching image. Please try again.')
+    return { imageUrl: null, error: 'Error fetching image. Please try again.' }
   }
 }
 
