@@ -79,7 +79,7 @@ const validationSchema = Yup.object().shape({
   trailer_B: Yup.string().nullable().transform(transformNA),
   trailer_AB: Yup.string().nullable().transform(transformNA),
   trip: Yup.string().nullable().transform(transformNA),
-  insertion_timestamp: Yup.date().required().transform(transformNA),
+  insertion_timestamp: Yup.date().transform(transformNA),
   update_timestamp: Yup.date().nullable().transform(transformNA),
 })
 

@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
 import { Formik, Form } from 'formik'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
@@ -47,7 +47,7 @@ const FormLayout = ({
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
-      {({ isSubmitting, setFieldValue, values }) => (
+      {({ isSubmitting, setFieldValue, values, errors }) => (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <Form>
             <h1 className='mb-8 text-xl'>
@@ -108,6 +108,16 @@ const FormLayout = ({
                   )}
                 </Box>
               </Grid>
+              {Object.keys(errors).length > 0 && (
+                <Grid item xs={12}>
+                  <Box mt={2}>
+                    <Typography variant='h6' color='error'>
+                      Validation Errors:
+                    </Typography>
+                    <pre>{JSON.stringify(errors, null, 2)}</pre>
+                  </Box>
+                </Grid>
+              )}
             </Grid>
           </Form>
         </LocalizationProvider>
