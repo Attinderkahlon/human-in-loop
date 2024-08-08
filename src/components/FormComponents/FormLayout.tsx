@@ -38,12 +38,9 @@ const FormLayout = ({
   isEditing,
   onEdit,
 }: FormLayoutProps) => {
-  const config = formConfigurations[formType as keyof typeof formConfigurations]
-
-  // if (!config) {
-  //   return <div>Error: Invalid form type</div>
-  // }
-
+  const config =
+    formConfigurations[formType as keyof typeof formConfigurations] ||
+    formConfigurations.default
   return (
     <Formik
       initialValues={initialValues}
@@ -120,19 +117,16 @@ const FormLayout = ({
 }
 
 const getFieldType = (field: string): string => {
-  switch (true) {
-    case field.includes('date'):
-      return 'date'
-    case field.includes('time') ||
-      field.includes('break') ||
-      field.includes('total_work') ||
-      field.includes('total_rest'):
-      return 'time'
-    case field.includes('signature'):
-      return 'select'
-    default:
-      return 'text'
-  }
+  if (field.includes('date')) return 'date'
+  if (
+    field.includes('time') ||
+    field.includes('break') ||
+    field.includes('total_work') ||
+    field.includes('total_rest')
+  )
+    return 'time'
+  if (field.includes('signature')) return 'select'
+  return 'text'
 }
 
 export default FormLayout
