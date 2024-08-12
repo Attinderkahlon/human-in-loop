@@ -105,6 +105,8 @@ export const formConfigurations = {
       'pick_up_location',
       'drop_off_location',
       'driver_signature',
+      'clock_on_time',
+      'clock_off_time',
     ],
   },
 }
