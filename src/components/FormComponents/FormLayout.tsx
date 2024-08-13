@@ -38,6 +38,7 @@ const hiddenFields = [
   'human_check',
   'insertion_timestamp',
   'update_timestamp',
+  'break_3_time',
 ]
 
 const FormLayout = ({
