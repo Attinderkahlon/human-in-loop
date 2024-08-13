@@ -4,7 +4,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import DynamicFormField from './DynamicFormField'
 import validationSchema from '../../validationSchema'
-import { formConfigurations } from '../../configs/formConfigs'
+// import { formConfigurations } from '../../configs/formConfigs'
+
 import { DataRecord } from '../../types'
 import FormSelect from './FormSelect'
 
@@ -38,9 +39,10 @@ const FormLayout = ({
   isEditing,
   onEdit,
 }: FormLayoutProps) => {
-  const config =
-    formConfigurations[formType as keyof typeof formConfigurations] ||
-    formConfigurations.default
+  // const config =
+  //   formConfigurations[formType as keyof typeof formConfigurations] ||
+  //   formConfigurations.default
+
   return (
     <Formik
       initialValues={initialValues}
@@ -53,15 +55,15 @@ const FormLayout = ({
             <h1 className='mb-8 text-xl'>
               Form Type:{' '}
               <span className='text-green-900'>
-                {initialValues.form_type
-                  ? initialValues.form_type
+                {formType
+                  ? formType
                       .replace(/_/g, ' ')
                       .replace(/\b\w/g, (char) => char.toUpperCase())
                   : 'N/A'}
               </span>
             </h1>
             <Grid container spacing={2}>
-              {config.fields.map((field) => {
+              {Object.keys(initialValues).map((field) => {
                 const fieldType = getFieldType(field)
                 return (
                   <Grid item xs={12} md={6} key={field}>
