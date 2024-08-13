@@ -32,6 +32,14 @@ const selectOptions = {
   ],
 }
 
+const hiddenFields = [
+  'id',
+  'file_path',
+  'human_check',
+  'insertion_timestamp',
+  'update_timestamp',
+]
+
 const FormLayout = ({
   formType,
   initialValues,
@@ -63,32 +71,34 @@ const FormLayout = ({
               </span>
             </h1>
             <Grid container spacing={2}>
-              {Object.keys(initialValues).map((field) => {
-                const fieldType = getFieldType(field)
-                return (
-                  <Grid item xs={12} md={6} key={field}>
-                    {fieldType === 'select' ? (
-                      <FormSelect
-                        name={field}
-                        label={field.replace(/_/g, ' ').toUpperCase()}
-                        options={selectOptions.driver_signature}
-                        disabled={!isEditing}
-                        value={values.driver_signature}
-                        onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-                          setFieldValue(field, e.target.value)
-                        }
-                      />
-                    ) : (
-                      <DynamicFormField
-                        name={field}
-                        label={field.replace(/_/g, ' ').toUpperCase()}
-                        type={fieldType}
-                        disabled={!isEditing}
-                      />
-                    )}
-                  </Grid>
-                )
-              })}
+              {Object.keys(initialValues)
+                .filter((field) => !hiddenFields.includes(field))
+                .map((field) => {
+                  const fieldType = getFieldType(field)
+                  return (
+                    <Grid item xs={12} md={6} key={field}>
+                      {fieldType === 'select' ? (
+                        <FormSelect
+                          name={field}
+                          label={field.replace(/_/g, ' ').toUpperCase()}
+                          options={selectOptions.driver_signature}
+                          disabled={!isEditing}
+                          value={values.driver_signature}
+                          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                            setFieldValue(field, e.target.value)
+                          }
+                        />
+                      ) : (
+                        <DynamicFormField
+                          name={field}
+                          label={field.replace(/_/g, ' ').toUpperCase()}
+                          type={fieldType}
+                          disabled={!isEditing}
+                        />
+                      )}
+                    </Grid>
+                  )
+                })}
               <Grid item xs={12}>
                 {Object.keys(errors).length > 0 && (
                   <Grid item xs={12}>
